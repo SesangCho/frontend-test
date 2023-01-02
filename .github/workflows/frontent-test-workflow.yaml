@@ -24,7 +24,7 @@ jobs:
       - name: Package Install
         working-directory: ./my-app
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn run install
+        run: yarn install
 
       - name: Run Eslint
         working-directory: ./my-app
