@@ -33,7 +33,7 @@ jobs:
         with:
           path: |
             my-app/node_modules
-          key: ${{ runner.os }}-explab-frontend-deploy-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-explab-frontend-deploy-${{ hashFiles('my-app/yarn.lock') }}
 
       - name: Package Install
         working-directory: ./my-app
