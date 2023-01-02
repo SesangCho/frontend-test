@@ -1,0 +1,37 @@
+env:
+  browser: true
+  es2021: true
+extends:
+- react-app
+- react-app/jest
+- plugin:react/recommended
+- plugin:react/jsx-runtime
+- airbnb
+overrides: []
+parserOptions:
+  ecmaVersion: 2021
+  sourceType: module
+plugins:
+- react
+rules:
+  # react/jsx-props-no-spreading: react-hook-form uses this style.
+  # We can do a different way but it is more verbose.
+  # https://stackoverflow.com/questions/74014670/react-hook-form-register-function-without-prop-spreading
+  react/jsx-props-no-spreading: 'off'
+  # react/jsx-filename-extension: We will use facebook's style.
+  react/jsx-filename-extension: 'off'
+  #  no-alert: We cannot replace "confirn", "alert", "prompt" now.
+  no-alert: 'off'
+  #  no-console: Do not use `console.log`. Only for error reporting
+  no-console:
+  - error
+  - allow:
+    - warn
+    - error
+  # no-param-reassign:Allow redux-toolkit state mutation as in
+  # https://redux-toolkit.js.org/usage/immer-reducers#linting-state-mutations
+  no-param-reassign:
+  - error
+  - props: true
+    ignorePropertyModificationsFor:
+    - state
