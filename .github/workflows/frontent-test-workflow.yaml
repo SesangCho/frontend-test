@@ -31,7 +31,7 @@ jobs:
 
       - name: Run Eslint
         working-directory: ./my-app
-        run: yarn run eslint
+        run: yarn run lint
 
       - name: Run unit test
         working-directory: ./my-app
