@@ -3,11 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-<<<<<<< Updated upstream
-  var a = 1
-  //unused
-=======
->>>>>>> Stashed changes
   return (
     <div className="App">
       <header className="App-header">
