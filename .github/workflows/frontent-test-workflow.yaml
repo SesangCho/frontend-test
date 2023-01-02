@@ -1,0 +1,35 @@
+name: test workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  unit-test-and-eslint:
+    name: Run unit test
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Use Node.js (16)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Package Install
+        working-directory: ./my-app
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn run install
+
+      - name: Run Eslint
+        working-directory: ./my-app
+        run: yarn run eslint
+
+      - name: Run unit test
+        working-directory: ./my-app
+        run: yarn run test
