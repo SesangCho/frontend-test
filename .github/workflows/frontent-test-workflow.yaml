@@ -41,11 +41,11 @@ jobs:
         run: yarn install
 
       - name: Run Eslint
-        continue-on-error: true
         working-directory: ./my-app
         run: yarn run lint
 
       - name: Run unit test
+        if: success() || failure()
         working-directory: ./my-app
         run: yarn run test
 
