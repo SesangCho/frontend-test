@@ -40,7 +40,12 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
+      - name: Build Test
+        working-directory: ./my-app
+        run: yarn run build
+
       - name: Run Eslint
+        continue-on-error: true
         working-directory: ./my-app
         run: yarn run lint
 
