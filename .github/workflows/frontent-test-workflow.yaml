@@ -33,16 +33,12 @@ jobs:
         with:
           path: |
             my-app/node_modules
-          key: ${{ runner.os }}-explab-frontend-deploy-${{ hashFiles('my-app/yarn.lock') }}
+          key: ${{ runner.os }}-explab-frontend-deploy-${{ hashFiles('./my-app/yarn.lock') }}
 
       - name: Package Install
         working-directory: ./my-app
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-
-      - name: Build Test
-        working-directory: ./my-app
-        run: yarn run build
 
       - name: Run Eslint
         continue-on-error: true
@@ -52,3 +48,11 @@ jobs:
       - name: Run unit test
         working-directory: ./my-app
         run: yarn run test
+
+      - name: Build Test
+        working-directory: ./my-app
+        run: yarn run build
+
+      - name: Uninstall Yarn
+        if: always()
+        run: npm uninstall -g yarn
