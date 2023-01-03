@@ -40,10 +40,6 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
-      - name: Build Test
-        working-directory: ./my-app
-        run: yarn run build
-
       - name: Run Eslint
         continue-on-error: true
         working-directory: ./my-app
@@ -52,3 +48,11 @@ jobs:
       - name: Run unit test
         working-directory: ./my-app
         run: yarn run test
+
+      - name: Build Test
+        working-directory: ./my-app
+        run: yarn run build
+
+      - name: Uninstall Yarn
+        if: always()
+        run: npm uninstall -g yarn
